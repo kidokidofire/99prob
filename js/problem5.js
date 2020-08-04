@@ -10,10 +10,10 @@ const reverse = (ary) => {
     let i = 0;
     let flg = ary[0];
     let rev = [];
-    //ary = [...ary];
+    spredAry = [...ary];
 
     while(flg != undefined){
-        flg = ary[i+1];
+        flg = spredAry[i+1];
         rev.unshift(ary[i]);
         i ++;
     }
