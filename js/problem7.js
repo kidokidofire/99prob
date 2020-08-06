@@ -9,12 +9,12 @@ const flatten = (ary) => {
 
     while(flg){
         flatAry = [];
-        for(let elem of ary){
+        ary.forEach(function(elem){
             flatAry = flatAry.concat(elem);
             if(typeof elem === 'object'){
                 flg = false;
             }
-        }
+        })
         flg = !flg;
         ary = flatAry;
     }
