@@ -11,7 +11,7 @@ import (
 func compressInt(arrays []int) ([]int){
 	var results []int
 	for _, v := range arrays {
-		if (!containsInt(results, v)) {
+		if (len(results) == 0 || v != results[len(results) - 1]) {
 			results = append(results, v)
 		}
 	}
@@ -20,27 +20,11 @@ func compressInt(arrays []int) ([]int){
 func compressString(str string) (string){
 	var results []string
 	for _, v := range strings.Split(str, "") {
-		if (!containsString(results, v)) {
+		if (len(results) == 0 || v != results[len(results) - 1]) {
 			results = append(results, v)
 		}
 	}
 	return strings.Join(results, "")
-}
-func containsInt(array []int, element int) bool {
-	for _, v := range array {
-		if element == v {
-			return true
-		}
-	}
-	return false
-}
-func containsString(array []string, element string) bool {
-	for _, v := range array {
-		if element == v {
-			return true
-		}
-	}
-	return false
 }
 func main() {
 	fmt.Println(compressInt([]int{1, 1, 2, 1, 2, 2, 3, 3, 3, 3}))
