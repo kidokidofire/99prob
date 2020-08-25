@@ -44,9 +44,33 @@ func rotateString(str string, shift int) string {
 	}
 	return strings.Join(strArray, "") + shifted
 }
+
+func rotateIntRecursion(arrays []int, shift int) []int {
+	if shift == 0 {
+		return arrays
+	} else if shift < 0 {
+		return rotateIntRecursion(append([]int{arrays[len(arrays)-1]}, arrays[:len(arrays)-1]...), shift+1)
+	} else {
+		return rotateIntRecursion(append(arrays[1:], arrays[0]), shift-1)
+	}
+}
+func rotateStringRecursion(str string, shift int) string {
+	if shift == 0 {
+		return str
+	} else if shift < 0 {
+		return rotateStringRecursion(str[len(str)-1:] + str[:len(str)-1], shift+1)
+	} else {
+		return rotateStringRecursion(str[1:] + str[:1], shift - 1)
+	}
+}
+
 func main() {
 	fmt.Println(rotateInt([]int{1, 2, 3}, 1))
 	fmt.Println(rotateInt([]int{1, 2, 3}, -1))
+	fmt.Println(rotateIntRecursion([]int{1, 2, 3}, 1))
+	fmt.Println(rotateIntRecursion([]int{1, 2, 3}, -1))
 	fmt.Println(rotateString("abcdefgh", 3))
 	fmt.Println(rotateString("abcdefgh", -2))
+	fmt.Println(rotateStringRecursion("abcdefgh", 3))
+	fmt.Println(rotateStringRecursion("abcdefgh", -2))
 }
