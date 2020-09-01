@@ -12,18 +12,24 @@ import (
 // rndSelect('abcdefgh', 3) // eda など
 
 func rndSelectInt(array []int, selectNum int) []int {
+	if selectNum == 0 {
+		return []int{}
+	}
 	seed, _ := crand.Int(crand.Reader, big.NewInt(math.MaxInt64))
 	rand.Seed(seed.Int64())
 
-	startIndex := rand.Intn(len(array) - selectNum)
-	return array[startIndex : startIndex+selectNum]
+	index := rand.Intn(len(array) - selectNum)
+	return append([]int{array[index]}, rndSelectInt(array, selectNum-1)...)
 }
 func rndSelectString(str string, selectNum int) string {
+	if selectNum == 0 {
+		return ""
+	}
 	seed, _ := crand.Int(crand.Reader, big.NewInt(math.MaxInt64))
 	rand.Seed(seed.Int64())
 
-	startIndex := rand.Intn(len(str) - selectNum)
-	return str[startIndex : startIndex+selectNum]
+	index := rand.Intn(len(str) - selectNum)
+	return str[index:index+1] + rndSelectString(str, selectNum-1)
 }
 
 func main() {
