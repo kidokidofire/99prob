@@ -24,9 +24,26 @@ func strArrayAppend(index int, next int, result []string, last int, strArray []s
 	}
 	return returnArray
 }
+func combinationsInt(str []int, num int) [][]int {
+	result := make([]int, num)
+	return intArrayAppend(0, 0, result, num-1, str, [][]int{})
+}
+func intArrayAppend(index int, next int, result []int, last int, strArray []int, returnArray [][]int) [][]int{
+	for j := next; j < len(strArray); j++ {
+		result[index] = strArray[j]
+		if index == last {
+			item := append([]int{}, result...)
+			returnArray = append(returnArray, item)
+		} else {
+			returnArray = append(returnArray, intArrayAppend(index+1, j+1, result, last, strArray, [][]int{})...)
+		}
+	}
+	return returnArray
+}
 
 func main() {
 	fmt.Println(combinations("abcdef", 2))
 	fmt.Println(combinations("abcdef", 3))
 	fmt.Println(combinations("abcdef", 4))
+	fmt.Println(combinationsInt([]int{1,2,3,4,5,6}, 2))
 }
